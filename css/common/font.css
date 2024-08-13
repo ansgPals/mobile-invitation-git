@@ -1,0 +1,39 @@
+@charset "utf-8";
+
+@font-face {
+  font-family: "Noto Serif KR";
+  font-style: normal;
+  font-weight: 400;
+  src: url("../../font/NotoSerifKR-Regular.ttf");
+}
+
+@font-face {
+  font-family: "Noto Serif KR";
+  font-style: normal;
+  font-weight: 500;
+  src: url("../../font/NotoSerifKR-Medium.ttf");
+}
+@font-face {
+  font-family: "Noto Serif KR";
+  font-style: normal;
+  font-weight: 600;
+  src: url("../../font/NotoSerifKR-SemiBold.ttf");
+}
+@font-face {
+  font-family: "Noto Serif KR";
+  font-style: normal;
+  font-weight: 700;
+  src: url("../../font/NotoSerifKR-Bold.ttf") format("ttf");
+}
+@font-face {
+  font-family: "Noto Serif KR";
+  font-style: normal;
+  font-weight: 800;
+  src: url("../../font/NotoSerifKR-ExtraBold.ttf") format("ttf");
+}
+@font-face {
+  font-family: "Noto Serif KR";
+  font-style: normal;
+  font-weight: 900;
+  src: url("../../font/NotoSerifKR-Black.ttf") format("ttf");
+}
