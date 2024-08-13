@@ -61,6 +61,7 @@ hr {
   width: calc(100% - 60px);
   border-top: 1px solid rgba(0, 163, 0, 0.416);
 }
+
 .section-01 > div:first-of-type {
   display: flex;
   flex-direction: column;
@@ -89,24 +90,30 @@ hr {
   position: relative;
   margin: 30px 0 0;
 }
-.section-01 > div:last-of-type img {
+.section-01 > div:last-of-type .bg-img {
   width: 100%;
   height: auto;
 }
-.section-01 > div:last-of-type p {
-  padding: 10px 20px;
-  border-radius: 5px;
-  position: absolute;
-  bottom: 30%;
-  color: white;
-  left: 10%;
-  line-height: 30px;
-  font-size: 15px;
-  font-weight: 500;
-  text-align: center;
-  letter-spacing: 10px;
-  /* background-color: rgba(62, 85, 55, 0.495); */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0.5;
+    transform: translateY(10%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
+
+.section-01 > div:last-of-type .text-img {
+  position: absolute;
+  z-index: 99;
+  bottom: -10%;
+  right: 10%;
+  width: 80%;
+  animation: fadeInUp 2s;
+}
+
 .section-02 {
   margin: 30px 0 0;
 }
@@ -119,19 +126,15 @@ hr {
   color: green;
 }
 .section-02 > h2:first-of-type {
-  margin: 20px 0 0;
+  margin: 20px 0 30px;
   font-size: 15px;
   line-height: 20px;
   font-weight: 700;
   text-align: center;
   line-height: 28px;
 }
-
-.section-02 > h2:last-of-type {
-  margin: 20px 0 30px;
-  font-weight: 400;
-  text-align: center;
-  line-height: 28px;
+.hidden {
+  display: hidden;
 }
 .section-02 > h3 {
   text-align: center;
@@ -159,9 +162,29 @@ hr {
 .section-02 > h3 > p > span {
   width: 60px;
 }
-.section-02 > img {
+
+.section-02 > div {
+  position: relative;
   width: 100%;
   height: auto;
+}
+.section-02 > div > img {
+  width: 100%;
+  height: auto;
+}
+.section-02 > div > h2 {
+  position: absolute;
+  top: 10%;
+  right: 0px;
+  padding: 10px 30px 10px 20px;
+  border-radius: 15px 0px 0 15px;
+  color: white;
+  line-height: 30px;
+  letter-spacing: 3px;
+  text-align: right;
+  width: fit-content;
+  font-weight: 400;
+  background-color: rgba(34, 109, 34, 0.531);
 }
 
 .section-03 {
@@ -298,18 +321,31 @@ hr {
   color: green;
 }
 .album-wrapper {
-  background-image: url("../img/background-1.png");
+  /* background-image: url("../img/background-1.png");
   background-repeat: unset;
-  background-size: cover;
+  background-size: cover; */
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   margin: 30px 0 0;
+  position: relative;
+}
+.album-wrapper > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  opacity: 0.5;
+  backdrop-filter: blur(10px);
+  filter: blur(5px);
 }
 .album-container {
-  width: 80%;
+  width: 95%;
   margin: 30px 0;
   display: flex;
   flex-direction: column;
