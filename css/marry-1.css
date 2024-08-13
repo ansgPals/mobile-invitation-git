@@ -134,7 +134,7 @@ hr {
   line-height: 28px;
 }
 .hidden {
-  display: hidden;
+  visibility: hidden;
 }
 .section-02 > h3 {
   text-align: center;
