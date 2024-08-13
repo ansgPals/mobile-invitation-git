@@ -133,9 +133,7 @@ hr {
   text-align: center;
   line-height: 28px;
 }
-.hidden {
-  visibility: hidden;
-}
+
 .section-02 > h3 {
   text-align: center;
   display: flex;
