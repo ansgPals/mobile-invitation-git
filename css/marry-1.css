@@ -111,7 +111,9 @@ hr {
   bottom: -5%;
   right: 0%;
   width: 80%;
-  animation: fadeInUp 1s;
+  opacity: 0;
+  animation: fadeInUp 1s ease-out forwards;
+  animation-delay: 1s;
 }
 
 .section-02 {
