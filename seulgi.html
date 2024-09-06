@@ -9,6 +9,32 @@
     <script src="./assets/jquery-3.5.1.min.js"></script>
     <script src="./assets/swiper.min.js"></script>
     <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+    <script>
+      // 우클릭 방지
+      document.addEventListener("contextmenu", function (e) {
+        e.preventDefault();
+      });
+
+      // F12, Ctrl+Shift+I, Ctrl+Shift+C 등의 단축키 방지
+      document.addEventListener("keydown", function (e) {
+        // F12 키 방지
+        if (e.key === "F12") {
+          e.preventDefault();
+        }
+        // Ctrl+Shift+I, Ctrl+Shift+C, Ctrl+Shift+J 키 방지
+        if (
+          e.ctrlKey &&
+          e.shiftKey &&
+          (e.key === "I" || e.key === "C" || e.key === "J")
+        ) {
+          e.preventDefault();
+        }
+        // Ctrl+U (소스 보기) 방지
+        if (e.ctrlKey && e.key === "U") {
+          e.preventDefault();
+        }
+      });
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link

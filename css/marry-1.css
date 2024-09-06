@@ -626,3 +626,13 @@ hr {
   height: 20px;
   transform: rotate(-35deg);
 }
+
+img {
+  -webkit-user-drag: none;
+  user-drag: none;
+  pointer-events: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
