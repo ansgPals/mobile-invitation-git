@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow-x: hidden;
+      width: 100vw;
+      margin: unset;
+    }
+    section {
+      max-width: 100%;
+      width: 500px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    hr {
+      margin: 2px 30px;
+      width: 100%;
+      border-top: 1px solid rgba(113, 113, 113, 0.416);
+    }
+    .section-02 {
+      margin: 30px 0 0;
+      width: calc(100% - 30px);
+    }
+    .section-02 > h1 {
+      font-size: 17px;
+      line-height: 30px;
+      height: 30px;
+      margin: 20px 0;
+      text-align: center;
+      color: rgb(78, 78, 78);
+    }
+    .img-div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 20px 0;
+    }
+
+    .img-div > img {
+      width: 150px;
+      height: auto;
+      object-fit: cover;
+    }
+
+    form {
+      padding: 15px 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    input.name {
+      max-width: 300px;
+      width: 300px;
+      height: 30px;
+      margin: 10px 0;
+      padding: 0 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    input[type="file"] {
+      width: 300px;
+      height: auto;
+      margin: 10px 0;
+      padding: 0 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    input[type="file"]::-webkit-file-upload-button {
+      width: 100px;
+      height: 30px;
+      margin: 10px 15px 10px 0px;
+      padding: 0 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #f1f1f1;
+      cursor: pointer;
+    }
+
+    button {
+      width: 322px;
+      height: 60px;
+      margin: 30px 0;
+      padding: 0 10px;
+      border: unset;
+      box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.1);
+      border-radius: 5px;
+      background-color: rgb(114, 196, 231);
+      cursor: pointer;
+      font-size: 20px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 2px;
+    }
+
+    #loading {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.483);
+      position: fixed;
+    }
+    #loading > p:first-of-type {
+      font-size: 20px;
+      line-height: 30px;
+      height: 30px;
+      margin: 20px 0;
+      text-align: center;
+      color: rgb(255, 255, 255);
+      font-weight: 700;
+      letter-spacing: 2px;
+      max-width: calc(100% - 30px);
+      word-wrap: break-word;
+    }
+
+    #loading > p:last-of-type {
+      font-size: 13px;
+      line-height: 30px;
+      margin: 10px 0;
+      text-align: center;
+      color: rgb(255, 255, 255);
+      font-weight: 500;
+      letter-spacing: normal;
+    }
+
+    #success,
+    #fail {
+      width: 100%;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: 30px 0 0;
+    }
+    #success > p,
+    #fail > p {
+      font-size: 20px;
+      line-height: 30px;
+      height: 30px;
+      margin: 20px 0;
+      text-align: center;
+      color: rgb(78, 78, 78);
+    }
+    #success > button {
+    }
+    #fail > button {
+      margin: 40px 0 0;
+    }
+    #fail > button:last-of-type {
+      margin: 20px 0 0;
+      background-color: grey;
+    }
+  </style>
+  <link
+    rel="stylesheet"
+    href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+  />
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <section id="loading">
+      <div class="img-div">
+        <img src="https://invitation-marriage.shop/img/cloud.gif" />
+      </div>
+      <p>업로드중...</p>
+      <p>최대 3분정도 소요될 수 있으니 잠시만 기다려주세요</p>
+    </section>
+    <section class="section-02 section">
+      <hr />
+      <hr />
+      <h1>사진을 신랑 & 신부에게 공유해주세요</h1>
+      <hr />
+      <div id="top-content">
+        <form id="myForm" onsubmit="handleFormSubmit(event)">
+          <input
+            type="text"
+            id="name"
+            placeholder="공유해주신 분 성함"
+            required
+            class="name"
+          />
+          <input type="file" id="files" multiple required />
+          <button type="submit">사진 업로드</button>
+        </form>
+      </div>
+      <div id="success">
+        <p>업로드가 완료되었습니다. <br />예쁜사진 감사합니다.</p>
+        <button onclick="resetToInitialState()" id="reLoadButton">
+          추가 업로드하기
+        </button>
+      </div>
+      <div id="fail">
+        <p>업로드에 실패하였습니다. <br />다시 시도해주세요.</p>
+        <button id="retryButton">다시 시도하기</button>
+        <button onclick="resetToInitialState()" id="reLoadButton">
+          취소하기
+        </button>
+      </div>
+    </section>
+  </body>
+  <script>
+    let lastFiles = null;
+
+    function handleUploadSuccess(response) {
+      document.getElementById("loading").style.display = "none";
+      document.getElementById("top-content").style.display = "none";
+      document.getElementById("success").style.display = "flex";
+      console.log("업로드 성공:", response);
+    }
+
+    function handleUploadFail() {
+      document.getElementById("loading").style.display = "none";
+      document.getElementById("top-content").style.display = "none";
+      document.getElementById("fail").style.display = "flex";
+    }
+
+    function fileSizeValidation(files) {
+      const totalFileSize =
+        files.reduce((prev, curr) => prev + (curr.size ?? curr.file_size), 0) +
+        (item.size ?? item.file_size ?? 0);
+
+      const fileSizeMB = totalFileSize / 1024 / 1024; // MB 단위로 변환
+      if (fileSizeMB > 100) {
+        alert(
+          "한번에 100MB 이상은 업로드 할 수 없습니다. 긴 동영상의 경우 하나씩 올려주시거나, 카카오톡으로 보내주세요."
+        );
+        return false;
+      }
+      return true;
+    }
+
+    function uploadFiles(file) {
+      axios
+        .post("https://jsonplaceholder.typicode.com/posts", {
+          files: file,
+        })
+        .then((response) => {
+          handleUploadSuccess(response);
+        })
+        .catch((error) => {
+          handleUploadFail();
+        });
+    }
+
+    function handleFormSubmit(event) {
+      event.preventDefault();
+      const files = document.getElementById("files").files;
+
+      if (files.length === 0) {
+        alert("파일을 선택해주세요.");
+        return;
+      }
+      if (!fileSizeValidation(files)) return;
+
+      document.getElementById("loading").style.display = "flex"; // 로딩 표시
+      lastFiles = files;
+      uploadFiles(files);
+    }
+
+    function resetToInitialState() {
+      const form = document.getElementById("myForm");
+      form.reset();
+      document.getElementById("top-content").style.display = "flex"; // 폼 보이기
+      document.getElementById("loading").style.display = "none"; // 로딩 숨기기
+      document.getElementById("success").style.display = "none"; // 성공 화면 숨기기
+      document.getElementById("fail").style.display = "none"; // 실패 화면 숨기기
+    }
+
+    const retryButton = document.getElementById("retryButton");
+
+    function handleRetry() {
+      document.getElementById("loading").style.display = "flex";
+      uploadFiles(lastFiles);
+    }
+
+    retryButton.addEventListener("click", () => {
+      handleRetry();
+    });
+  </script>
+</html>
