@@ -183,13 +183,6 @@
       <hr />
       <div id="top-content">
         <form id="myForm" onsubmit="handleFormSubmit(event)">
-          <input
-            type="text"
-            id="name"
-            placeholder="공유해주신 분 성함"
-            required
-            class="name"
-          />
           <input type="file" id="files" multiple required />
           <button type="submit">사진 업로드</button>
         </form>
@@ -226,26 +219,39 @@
     }
 
     function fileSizeValidation(files) {
-      const totalFileSize =
-        files.reduce((prev, curr) => prev + (curr.size ?? curr.file_size), 0) +
-        (item.size ?? item.file_size ?? 0);
+      const totalFileSize = Array.from(files).reduce((prev, curr) => {
+        return prev + (curr.size ?? curr.file_size ?? 0);
+      }, 0);
 
-      const fileSizeMB = totalFileSize / 1024 / 1024; // MB 단위로 변환
+      const fileSizeMB = totalFileSize / 1024 / 1024;
+
       if (fileSizeMB > 100) {
         alert(
-          "한번에 100MB 이상은 업로드 할 수 없습니다. 긴 동영상의 경우 하나씩 올려주시거나, 카카오톡으로 보내주세요."
+          "총 100MB 이상은 업로드 할 수 없습니다. 긴 동영상의 경우 하나씩 올려주시거나, 카카오톡으로 보내주세요."
         );
         return false;
       }
+
       return true;
     }
 
     function uploadFiles(file) {
+      const fileList = [...file];
+      console.log(fileList);
+
+      const formData = new FormData();
+
+      fileList.forEach((fileItem, index) => {
+        formData.append("files", fileItem);
+      });
       axios
-        .post("https://jsonplaceholder.typicode.com/posts", {
-          files: file,
+        .post("http://58.123.134.80:8193/upload", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
         })
         .then((response) => {
+          console.log(response);
           handleUploadSuccess(response);
         })
         .catch((error) => {
@@ -265,6 +271,7 @@
 
       document.getElementById("loading").style.display = "flex"; // 로딩 표시
       lastFiles = files;
+
       uploadFiles(files);
     }
 

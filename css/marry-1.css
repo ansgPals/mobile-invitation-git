@@ -10,6 +10,19 @@
   z-index: 9999;
   display: none;
 }
+.upload {
+  background-color: #dbf7e4;
+  padding: 13px 20px;
+  text-decoration: underline;
+  border-radius: 0.8px;
+  font-size: 15px;
+  font-weight: 500;
+}
+.upload > img {
+  width: 20px;
+  height: 20px;
+  margin: 0 10px 0 0;
+}
 .top-button.active {
   display: block;
 }

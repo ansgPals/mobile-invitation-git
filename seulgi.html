@@ -459,6 +459,18 @@
         />
       </p>
     </section>
+    <section class="section-08 section">
+      <hr />
+      <h3>예식 사진 공유</h3>
+      <hr />
+      <p>
+        예식날 예쁘게 촬영해주신 사진을<br />
+        신랑신부에게 업로드해주세요.
+      </p>
+      <button class="upload">
+        <img src="./img/green-camera.png" /> 업로드하러가기
+      </button>
+    </section>
     <section class="section-09 section">
       <div>
         저희의 새 출발과 행복을 응원해주신<br />
@@ -516,6 +528,10 @@
         window.scrollTo({ top: 0, behavior: "smooth" });
       });
 
+      const uploadButton = document.querySelector(".upload");
+      uploadButton.addEventListener("click", (e) => {
+        location.href = "./form.html";
+      });
       document.addEventListener("DOMContentLoaded", () => {
         const sections = document.querySelectorAll(
           ".section-01, .section-02, .section-03, .section-04, .section-05, .section-06, .section-07, .section-08, .section-09"
