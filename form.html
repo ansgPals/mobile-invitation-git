@@ -183,7 +183,13 @@
       <hr />
       <div id="top-content">
         <form id="myForm" onsubmit="handleFormSubmit(event)">
-          <input type="file" id="files" multiple required />
+          <input
+            type="file"
+            id="files"
+            accept="image/*,video/*"
+            multiple
+            required
+          />
           <button type="submit">사진 업로드</button>
         </form>
       </div>
