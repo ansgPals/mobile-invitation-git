@@ -205,11 +205,11 @@
   <script>
     let lastFiles = null;
 
-    function handleUploadSuccess(response) {
+    function handleUploadSuccess(res) {
       document.getElementById("loading").style.display = "none";
       document.getElementById("top-content").style.display = "none";
       document.getElementById("success").style.display = "flex";
-      console.log("업로드 성공:", response);
+      console.log("업로드 성공:", res);
     }
 
     function handleUploadFail() {
@@ -254,8 +254,7 @@
             },
           }
         );
-
-        handleUploadSuccess(response);
+        res.status === 200 ? handleUploadSuccess(res) : handleUploadFail();
       } catch (e) {
         handleUploadFail();
       }
