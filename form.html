@@ -215,6 +215,7 @@
       document.getElementById("loading").style.display = "none";
       document.getElementById("top-content").style.display = "none";
       document.getElementById("success").style.display = "flex";
+      document.getElementById("fail").style.display = "none";
       console.log("업로드 성공:", res);
     }
 
@@ -222,6 +223,7 @@
       document.getElementById("loading").style.display = "none";
       document.getElementById("top-content").style.display = "none";
       document.getElementById("fail").style.display = "flex";
+      document.getElementById("success").style.display = "none";
     }
 
     function fileSizeValidation(files) {
